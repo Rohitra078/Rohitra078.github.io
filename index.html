@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rohit Hiraman Rajput — Robotics & AI Engineer</title>
+  <meta name="description" content="Portfolio of Rohit Hiraman Rajput — Robotics & AI Engineer specializing in autonomous multi-modal locomotion, perception, LiDAR SLAM, and computer vision. M.S. Robotics from Northeastern University.">
+  <meta name="keywords" content="Rohit Rajput, Robotics Engineer, AI Engineer, M4 Morphobot, Autonomous Systems, SLAM, LiDAR, ROS, ROS2, PyTorch, Northeastern University">
+  <meta name="author" content="Rohit Hiraman Rajput">
+
+  <!-- OpenGraph / Social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rohit Hiraman Rajput — Robotics & AI Engineer">
+  <meta property="og:description" content="Autonomous navigation, multi-modal robotics, LiDAR SLAM, and computer vision systems.">
+  <meta property="og:image" content="assets/projects/m4/m4-hero.jpg">
+
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23050810'/><path d='M30 70V30h20a15 15 0 0 1 0 30H30l24 20' stroke='%2322d3ee' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+
+  <!-- Modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Ambient cursor follower -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo" aria-label="Rohit Rajput Home">
+        <span class="logo-mark">RR</span>
+        <span>rohit.rajput<span class="blink">_</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#projects"><span class="num">01.</span>Projects</a></li>
+          <li><a href="#about"><span class="num">02.</span>About</a></li>
+          <li><a href="#experience"><span class="num">03.</span>Experience</a></li>
+          <li><a href="#skills"><span class="num">04.</span>Skills</a></li>
+          <li><a href="#docs"><span class="num">05.</span>Publications</a></li>
+          <li><a href="#contact" class="nav-cta btn-ghost">Get in Touch</a></li>
+        </ul>
+      </nav>
+
+      <button class="menu-btn" aria-label="Toggle menu" id="menu-btn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <canvas id="lidar-canvas" aria-hidden="true"></canvas>
+
+    <!-- Robotics HUD Overlay -->
+    <div class="hud hud-tr" aria-hidden="true">
+      <div>SYS // <b>ONLINE</b></div>
+      <div>LOC // <b>BOSTON, MA [42.3398° N, 71.0891° W]</b></div>
+      <div>STACK // <b>ROS 2 · GAZEBO · PYTORCH</b></div>
+      <div>SENSOR // <b>LIDAR VLP-16 · REALSENSE</b></div>
+    </div>
+    <div class="hud hud-br" aria-hidden="true">
+      <div>ESTIMATION // <b>6-DOF REALTIME ODOMETRY</b></div>
+      <div>FRAME // <b>MAP → ODOM → BASE_LINK</b></div>
+    </div>
+    <div class="hud-corner tl" aria-hidden="true"></div>
+    <div class="hud-corner tr" aria-hidden="true"></div>
+    <div class="hud-corner bl" aria-hidden="true"></div>
+    <div class="hud-corner br" aria-hidden="true"></div>
+
+    <div class="container hero-content">
+      <span class="eyebrow reveal">Robotics & AI Engineer · M.S. Northeastern</span>
+      <h1 class="reveal reveal-d1">
+        Engineering autonomy for
+        <span class="grad-text line">complex physical worlds.</span>
+      </h1>
+      <p class="hero-role reveal reveal-d2">
+        &gt; specialisation: <span class="typed"></span><span class="caret"></span>
+      </p>
+      <p class="hero-desc reveal reveal-d3">
+        I develop end-to-end autonomous robotic systems — from transforming Mars morphobots and bat-inspired bio-drones to LiDAR SLAM odometry and real-time vision pipelines.
+      </p>
+
+      <div class="hero-actions reveal reveal-d3">
+        <a href="#projects" class="btn btn-primary">
+          <span>Explore Projects</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+        </a>
+        <a href="https://repository.library.northeastern.edu/files/neu:4f21z8919" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>M.S. Thesis</span>
+        </a>
+        <a href="#contact" class="btn btn-ghost">
+          <span>Contact</span>
+        </a>
+      </div>
+
+      <div class="hero-socials reveal reveal-d3">
+        <a href="https://github.com/Rohitra078" target="_blank" rel="noopener" class="icon-btn" aria-label="GitHub Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="https://gitlab.com/Rohitra078" target="_blank" rel="noopener" class="icon-btn" aria-label="GitLab Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="m23.6 9.58-1.01-3.11c-.13-.39-.41-.7-.79-.86-.37-.16-.8-.14-1.15.06l-4.13 2.39H7.48L3.35 5.67c-.35-.2-.78-.22-1.15-.06-.38.16-.66.47-.79.86L.4 9.58c-.2.62-.01 1.3.48 1.73l10.6 9.42c.3.27.74.27 1.04 0l10.6-9.42c.49-.43.68-1.11.48-1.73z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/rohit-rajput1/" target="_blank" rel="noopener" class="icon-btn" aria-label="LinkedIn Profile">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="mailto:rajput.ro@northeastern.edu" class="icon-btn" aria-label="Send Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="mouse"></div>
+      <span>SCROLL</span>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">01 // Selected Work</span>
+        <h2 class="section-title">Robotics & AI Systems</h2>
+        <p class="section-lead">
+          End-to-end hardware-in-the-loop, perception pipelines, custom SLAM implementations, and multi-modal autonomous motion planning.
+        </p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="filters reveal reveal-d1" role="tablist">
+        <button class="filter-btn active" data-filter="all" role="tab">All Systems</button>
+        <button class="filter-btn" data-filter="robotics" role="tab">Robotics</button>
+        <button class="filter-btn" data-filter="perception" role="tab">Perception & SLAM</button>
+        <button class="filter-btn" data-filter="ai" role="tab">Deep Learning</button>
+        <button class="filter-btn" data-filter="research" role="tab">Research</button>
+      </div>
+
+      <!-- Bento Grid (Populated dynamically from js/data.js) -->
+      <div class="bento" id="bento-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="portrait reveal">
+          <img src="assets/img/profile.jpg" alt="Rohit Hiraman Rajput" loading="lazy">
+          <div class="portrait-tag">
+            <span class="chip-dot">Boston, MA</span>
+            <span class="mono">NEU Robotics Alumni</span>
+          </div>
+        </div>
+
+        <div class="about-text reveal reveal-d1">
+          <span class="eyebrow">02 // Background</span>
+          <h2 class="section-title">Multidisciplinary by nature. Roboticist by passion.</h2>
+          <p>
+            I am a <strong>Robotics & AI Engineer</strong> who thrives at the intersection of mechanical design, embedded compute, and modern perception. I hold a <strong>Master’s in Robotics Engineering from Northeastern University</strong>, where my thesis work focused on enabling the <strong>M4 (Multi-Modal Mobility Morphobot)</strong> robot to autonomously choose its locomotion mode and navigate complex Martian-like terrain.
+          </p>
+          <p>
+            With a foundational <strong>B.E. in Mechanical Engineering</strong>, I previously worked as a design engineer at <strong>Faurecia</strong> and co-founded <strong>Tectural Technology</strong> as Head of the Robotics Division. This blend gives me end-to-end perspective: I design physical mechanisms in CAD, instrument them with sensors, and write the perception, SLAM, and planning software that breathes autonomous life into them.
+          </p>
+          <p>
+            My daily stack includes <strong>Python, C++, ROS / ROS 2, PyTorch, Linux, Gazebo</strong>, and hands-on sensor integration with LiDAR, depth cameras, and RTOS flight controllers.
+          </p>
+
+          <div class="stats">
+            <div class="stat glass">
+              <div class="stat-num grad-text">MS</div>
+              <div class="stat-label">Robotics, Northeastern</div>
+            </div>
+            <div class="stat glass">
+              <div class="stat-num grad-text">5+</div>
+              <div class="stat-label">Robotics & AI Systems</div>
+            </div>
+            <div class="stat glass">
+              <div class="stat-num grad-text">3</div>
+              <div class="stat-label">Labs & Industry Roles</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research & Career Trajectory Timeline -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">03 // Trajectory</span>
+        <h2 class="section-title">Research & Engineering Experience</h2>
+        <p class="section-lead">
+          From academic frontier labs at Northeastern to commercial engineering teams.
+        </p>
+      </div>
+
+      <div class="timeline reveal reveal-d1">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card glass">
+            <div class="tl-top">
+              <h3>Graduate Researcher — M.S. Thesis</h3>
+              <span class="tl-date">2022 — 2023</span>
+            </div>
+            <div class="tl-org">SiliconSynapse Lab & Field Robotics Lab · Northeastern University</div>
+            <ul>
+              <li>Researched and built the autonomy stack for the M4 Multi-Modal Mobility Morphobot for Mars and search-and-rescue missions.</li>
+              <li>Engineered 2.5D elevation and CNN traversability costmaps from a single RealSense depth sensor.</li>
+              <li>Developed a 3D multi-modal path planner optimizing energy trade-offs between rolling and aerial flight (~92% energy savings vs drone-only flight in crater scenarios).</li>
+              <li>Advised by Prof. Dr. Alireza Ramezani and Prof. Dr. Hanumant Singh.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card glass">
+            <div class="tl-top">
+              <h3>Robotics Research Assistant — Aerobat WUAV</h3>
+              <span class="tl-date">2021 — 2022</span>
+            </div>
+            <div class="tl-org">SiliconSynapse Lab · Northeastern University</div>
+            <ul>
+              <li>Developed prototype and flight control systems for the 70 g bat-inspired flapping-wing unmanned aerial vehicle.</li>
+              <li>Engineered an RGB-D obstacle avoidance and depth-estimation pipeline in PyTorch based on MonoDepth with low latency.</li>
+              <li>Engineered sensor and camera calibration routines that reduced launcher testing time by 10%.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card glass">
+            <div class="tl-top">
+              <h3>M.S. in Robotics Engineering</h3>
+              <span class="tl-date">2021 — 2023</span>
+            </div>
+            <div class="tl-org">Northeastern University · Boston, MA</div>
+            <ul>
+              <li>Deep coursework and research: Autonomous Mobile Robotics, Computer Vision, SLAM, Machine Learning, Robot Dynamics and Control.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card glass">
+            <div class="tl-top">
+              <h3>Co-Founder & Head of Robotics Division</h3>
+              <span class="tl-date">Before 2021</span>
+            </div>
+            <div class="tl-org">Tectural Technology</div>
+            <ul>
+              <li>Led mechanical, electrical, and firmware design of custom robotic platforms from zero to prototype.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card glass">
+            <div class="tl-top">
+              <h3>Design Engineer</h3>
+              <span class="tl-date">Before 2021</span>
+            </div>
+            <div class="tl-org">Faurecia</div>
+            <ul>
+              <li>Automotive mechanical design, CAD modeling, tolerance analysis, and manufacturing automation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hard Skills & Capabilities Matrix -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">04 // Core Competencies</span>
+        <h2 class="section-title">Technical Capabilities Matrix</h2>
+        <p class="section-lead">
+          Languages, frameworks, perception toolkits, and hardware platforms I work with.
+        </p>
+      </div>
+
+      <div class="skills-grid reveal reveal-d1">
+        <div class="skill-card glass">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
+          </div>
+          <h3>Robotics & Autonomy</h3>
+          <div class="chips">
+            <span class="chip">ROS / ROS 2</span>
+            <span class="chip">Gazebo</span>
+            <span class="chip">ArduPilot SITL</span>
+            <span class="chip">MAVROS</span>
+            <span class="chip">LeGO-LOAM</span>
+            <span class="chip">A-LOAM</span>
+            <span class="chip">Elevation Mapping</span>
+            <span class="chip">3D A* Planning</span>
+            <span class="chip">Sensor Fusion</span>
+            <span class="chip">Kinematics</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass">
+          <div class="skill-icon" style="color: var(--violet); background: rgba(167,139,250,.1); border-color: rgba(167,139,250,.25)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z"></path></svg>
+          </div>
+          <h3>Perception & AI</h3>
+          <div class="chips">
+            <span class="chip">PyTorch</span>
+            <span class="chip">OpenCV</span>
+            <span class="chip">CNNs / VGG16</span>
+            <span class="chip">SVM</span>
+            <span class="chip">FaceNet</span>
+            <span class="chip">MonoDepth</span>
+            <span class="chip">Point Clouds</span>
+            <span class="chip">Feature Extraction</span>
+            <span class="chip">scikit-learn</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass">
+          <div class="skill-icon" style="color: var(--lime); background: rgba(163,230,53,.1); border-color: rgba(163,230,53,.25)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          </div>
+          <h3>Programming & Systems</h3>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">C++</span>
+            <span class="chip">Linux / Ubuntu</span>
+            <span class="chip">Bash</span>
+            <span class="chip">MATLAB</span>
+            <span class="chip">Git & GitHub</span>
+            <span class="chip">Docker</span>
+          </div>
+        </div>
+
+        <div class="skill-card glass">
+          <div class="skill-icon" style="color: var(--amber); background: rgba(251,191,36,.1); border-color: rgba(251,191,36,.25)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+          </div>
+          <h3>Hardware & Prototyping</h3>
+          <div class="chips">
+            <span class="chip">Velodyne VLP-16 LiDAR</span>
+            <span class="chip">Intel RealSense</span>
+            <span class="chip">Raspberry Pi</span>
+            <span class="chip">NVIDIA Jetson</span>
+            <span class="chip">CAD Automation</span>
+            <span class="chip">Thermal Imaging</span>
+            <span class="chip">IMU & GPS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications & Artifacts Section -->
+  <section id="docs">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">05 // Documentation</span>
+        <h2 class="section-title">Theses, Reports & Papers</h2>
+        <p class="section-lead">
+          Full technical documents, research slide decks, and project reports archived from my academic work.
+        </p>
+      </div>
+
+      <div class="docs reveal reveal-d1">
+        <a href="https://repository.library.northeastern.edu/files/neu:4f21z8919" target="_blank" rel="noopener" class="doc glass">
+          <div class="doc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <div>
+            <h4>Autonomous M4 Morphobot: Traversability & 3D Planning</h4>
+            <span>Northeastern Library Repository · Master's Thesis</span>
+          </div>
+        </a>
+
+        <a href="assets/docs/lidar-mapping-nuance.pdf" target="_blank" rel="noopener" class="doc glass">
+          <div class="doc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <div>
+            <h4>LiDAR Mapping Through NUance Car (LeGO-LOAM)</h4>
+            <span>3.7 MB PDF · Project Report & Slide Deck</span>
+          </div>
+        </a>
+
+        <a href="assets/docs/face-report.pdf" target="_blank" rel="noopener" class="doc glass">
+          <div class="doc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <div>
+            <h4>FACE: Assistive Wearable for Face Recognition</h4>
+            <span>645 KB PDF · Final Project Report</span>
+          </div>
+        </a>
+
+        <a href="assets/docs/covid-xray-classifier.pdf" target="_blank" rel="noopener" class="doc glass">
+          <div class="doc-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <div>
+            <h4>Evaluation of CNN & SVM COVID-19 Chest X-Ray Classifiers</h4>
+            <span>560 KB PDF · Technical Report</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA Section -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-card glass reveal">
+        <span class="eyebrow" style="justify-content: center">Get in Touch</span>
+        <h2>Let's build something <span class="grad-text">autonomous.</span></h2>
+        <p>
+          I am always open to discussing new robotics ventures, research collaborations, autonomous systems engineering, or AI perception opportunities.
+        </p>
+
+        <div class="contact-actions">
+          <a href="mailto:rajput.ro@northeastern.edu" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span>rajput.ro@northeastern.edu</span>
+          </a>
+          <button type="button" class="btn btn-ghost" id="copy-email-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Copy Email</span>
+          </button>
+          <a href="https://www.linkedin.com/in/rohit-rajput1/" target="_blank" rel="noopener" class="btn btn-ghost">
+            <span>LinkedIn</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
+          <a href="https://github.com/Rohitra078" target="_blank" rel="noopener" class="btn btn-ghost">
+            <span>GitHub</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
+        </div>
+        <div class="copy-toast" id="copy-toast" role="status"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <span class="mono">Rohit Hiraman Rajput</span> &copy; 2026. Designed for performance & GitHub Pages.
+      </div>
+      <div class="chip chip-dot">
+        <span>Available for Robotics & AI Opportunities</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

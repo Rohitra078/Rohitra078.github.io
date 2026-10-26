@@ -1,0 +1,15 @@
+# Ignore original export archives & scratch files
+*.zip
+*.xml
+_media_raw/
+_content_dump.txt
+Screenshot*
+
+# Scratch & temporary logs
+scratch/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini

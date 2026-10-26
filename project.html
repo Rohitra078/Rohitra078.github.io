@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details — Rohit Hiraman Rajput</title>
+  <meta name="description" content="Technical documentation and research project breakdown by Rohit Hiraman Rajput.">
+
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23050810'/><path d='M30 70V30h20a15 15 0 0 1 0 30H30l24 20' stroke='%2322d3ee' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Ambient cursor follower -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <header class="nav scrolled">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">RR</span>
+        <span>rohit.rajput<span class="blink">_</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html#projects"><span class="num">01.</span>Projects</a></li>
+          <li><a href="index.html#about"><span class="num">02.</span>About</a></li>
+          <li><a href="index.html#experience"><span class="num">03.</span>Experience</a></li>
+          <li><a href="index.html#skills"><span class="num">04.</span>Skills</a></li>
+          <li><a href="index.html#docs"><span class="num">05.</span>Publications</a></li>
+          <li><a href="index.html#contact" class="nav-cta btn-ghost">Get in Touch</a></li>
+        </ul>
+      </nav>
+
+      <button class="menu-btn" aria-label="Toggle menu" id="menu-btn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Project Dynamic Container -->
+  <main id="project-app">
+    <!-- Populated by script -->
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <a href="index.html" style="color: var(--cyan)">&larr; Back to Portfolio</a> &nbsp;·&nbsp;
+        <span class="mono">Rohit Hiraman Rajput</span> &copy; 2026.
+      </div>
+      <div class="chip chip-dot">
+        <span>Robotics & AI Engineer</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox zoom container -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <img>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script>
+    (function () {
+      const app = document.getElementById("project-app");
+      const urlParams = new URLSearchParams(window.location.search);
+      let slug = urlParams.get("id");
+
+      if (!slug && typeof PROJECTS !== "undefined" && PROJECTS.length) {
+        slug = PROJECTS[0].slug;
+      }
+
+      const pIdx = PROJECTS.findIndex(p => p.slug === slug);
+      const project = pIdx >= 0 ? PROJECTS[pIdx] : PROJECTS[0];
+
+      if (!project) {
+        app.innerHTML = `<div class="container" style="padding: 140px 0; text-align: center;"><h2>Project not found</h2><p><a href="index.html">Return to Home</a></p></div>`;
+        return;
+      }
+
+      // Update page title
+      document.title = `${project.title} — Rohit Hiraman Rajput`;
+
+      // Build Table of Contents & Prose from project.body
+      let tocHtml = "";
+      let proseHtml = "";
+      let sectionCount = 0;
+
+      (project.body || []).forEach(block => {
+        if (block.type === "h") {
+          sectionCount++;
+          const secId = "sec-" + sectionCount;
+          tocHtml += `<a href="#${secId}">${block.text}</a>`;
+          proseHtml += `<h2 id="${secId}">${block.text}</h2>`;
+        } else if (block.type === "p") {
+          proseHtml += `<p>${block.text}</p>`;
+        } else if (block.type === "list") {
+          const listItems = block.items.map(it => `<li>${it}</li>`).join("");
+          proseHtml += `<ul>${listItems}</ul>`;
+        } else if (block.type === "img") {
+          proseHtml += `
+            <figure>
+              <img src="${block.src}" alt="${block.caption || ''}" class="${block.light ? 'light' : ''}" loading="lazy">
+              ${block.caption ? `<figcaption>${block.caption}</figcaption>` : ''}
+            </figure>
+          `;
+        } else if (block.type === "video") {
+          proseHtml += `
+            <figure>
+              <video controls playsinline preload="metadata">
+                <source src="${block.src}" type="video/mp4">
+              </video>
+              ${block.caption ? `<figcaption>${block.caption}</figcaption>` : ''}
+            </figure>
+          `;
+        } else if (block.type === "youtube") {
+          proseHtml += `
+            <figure>
+              <div class="yt" data-id="${block.id}">
+                <img src="https://img.youtube.com/vi/${block.id}/maxresdefault.jpg" alt="Video preview" onerror="this.src='https://img.youtube.com/vi/${block.id}/hqdefault.jpg'">
+                <div class="yt-play" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+              ${block.caption ? `<figcaption>${block.caption}</figcaption>` : ''}
+            </figure>
+          `;
+        } else if (block.type === "gallery") {
+          const galleryItems = block.items.map(it => `
+            <figure>
+              <img src="${it.src}" alt="${it.caption || ''}" class="${it.light ? 'light' : ''}" loading="lazy">
+              ${it.caption ? `<figcaption>${it.caption}</figcaption>` : ''}
+            </figure>
+          `).join("");
+          proseHtml += `<div class="gallery">${galleryItems}</div>`;
+        } else if (block.type === "callout") {
+          proseHtml += `<div class="callout">${block.text}</div>`;
+        } else if (block.type === "metrics") {
+          const mHtml = block.items.map(m => `
+            <div class="metric glass">
+              <b class="grad-text">${m.value}</b>
+              <span>${m.label}</span>
+            </div>
+          `).join("");
+          proseHtml += `<div class="metrics">${mHtml}</div>`;
+        }
+      });
+
+      // Tags
+      const tagsHtml = (project.tags || []).map(t => `<span class="chip">${t}</span>`).join("");
+
+      // Action links
+      const linksHtml = (project.links || []).map(l => `
+        <a href="${l.url}" target="_blank" rel="noopener" class="btn btn-primary">
+          <span>${l.label}</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      `).join("");
+
+      // Next / Prev projects
+      const prevIdx = (pIdx - 1 + PROJECTS.length) % PROJECTS.length;
+      const nextIdx = (pIdx + 1) % PROJECTS.length;
+      const prevP = PROJECTS[prevIdx];
+      const nextP = PROJECTS[nextIdx];
+
+      app.innerHTML = `
+        <!-- Project Hero -->
+        <div class="p-hero">
+          <div class="p-hero-bg" aria-hidden="true">
+            <img src="${project.cover}" alt="">
+          </div>
+
+          <div class="container">
+            <a href="index.html#projects" class="back-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+              <span>Back to all projects</span>
+            </a>
+
+            <span class="eyebrow">${(project.category || []).join(" · ").toUpperCase()}</span>
+            <h1 class="p-title">${project.title}</h1>
+            <p class="p-sub">${project.short}</p>
+
+            <dl class="p-meta">
+              <div class="glass">
+                <dt>Role</dt>
+                <dd>${project.role || 'Lead Engineer'}</dd>
+              </div>
+              <div class="glass">
+                <dt>Organization</dt>
+                <dd>${project.org || 'Northeastern University'}</dd>
+              </div>
+              <div class="glass">
+                <dt>Timeline</dt>
+                <dd>${project.year}</dd>
+              </div>
+              <div class="glass">
+                <dt>Discipline</dt>
+                <dd>${(project.category || []).join(', ')}</dd>
+              </div>
+            </dl>
+
+            <div class="p-links">
+              ${linksHtml}
+            </div>
+
+            <div class="p-cover">
+              ${project.coverVideo ? `
+                <video controls autoplay muted loop playsinline>
+                  <source src="${project.coverVideo}" type="video/mp4">
+                </video>
+              ` : `
+                <img src="${project.cover}" alt="${project.title}">
+              `}
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Content Body -->
+        <div class="container p-layout">
+          <aside class="p-toc">
+            <h5>On this page</h5>
+            <nav id="toc-nav">
+              ${tocHtml}
+            </nav>
+
+            <div class="p-tags">
+              ${tagsHtml}
+            </div>
+          </aside>
+
+          <article class="prose">
+            ${proseHtml}
+          </article>
+        </div>
+
+        <!-- Next / Previous Project Footer Navigation -->
+        <div class="container p-nav">
+          <a href="project.html?id=${encodeURIComponent(prevP.slug)}" class="glass prev">
+            <small>&larr; Previous Project</small>
+            <h4>${prevP.title}</h4>
+          </a>
+          <a href="project.html?id=${encodeURIComponent(nextP.slug)}" class="glass next">
+            <small>Next Project &rarr;</small>
+            <h4>${nextP.title}</h4>
+          </a>
+        </div>
+      `;
+
+      // Smooth active scroll spy for Table of Contents
+      const tocLinks = document.querySelectorAll("#toc-nav a");
+      const headings = document.querySelectorAll(".prose h2");
+      window.addEventListener("scroll", () => {
+        const top = window.scrollY + 140;
+        headings.forEach(h => {
+          if (top >= h.offsetTop && top < h.offsetTop + h.offsetHeight + 400) {
+            tocLinks.forEach(l => l.classList.remove("active"));
+            const activeL = document.querySelector(`#toc-nav a[href="#${h.id}"]`);
+            if (activeL) activeL.classList.add("active");
+          }
+        });
+      }, { passive: true });
+
+      // YouTube click to load
+      document.addEventListener("click", e => {
+        const ytCard = e.target.closest(".yt");
+        if (ytCard && !ytCard.querySelector("iframe")) {
+          const vidId = ytCard.dataset.id;
+          if (vidId) {
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&rel=0`;
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            ytCard.innerHTML = "";
+            ytCard.appendChild(iframe);
+          }
+        }
+      });
+
+      // Mobile Menu Toggle
+      const menuBtn = document.getElementById("menu-btn");
+      if (menuBtn) {
+        menuBtn.addEventListener("click", () => {
+          document.body.classList.toggle("menu-open");
+        });
+      }
+
+      // Lightbox zoom
+      const lb = document.getElementById("lightbox");
+      const lbImg = lb.querySelector("img");
+      document.addEventListener("click", e => {
+        if (e.target.matches(".prose figure img, .p-cover img")) {
+          lbImg.src = e.target.src;
+          lb.classList.add("open");
+        } else if (lb.classList.contains("open")) {
+          lb.classList.remove("open");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
