@@ -1,147 +1,133 @@
-# Website Editing & Maintenance Guide
+# 📘 Website Editing & Maintenance Guide
 
-This guide explains how to edit your portfolio, add new robotics/AI projects, update your work experience, and deploy changes to GitHub.
+Adding new robotics and AI projects to your website is designed to be **fast, efficient, and zero-headache**. 
 
----
-
-## 🎯 Quick Rule: Everything Lives in `js/data.js`
-
-To make future updates effortless, the entire site is data-driven. You **do not need to touch HTML** to add new projects, update your bio, or edit skills. 
-
-All content is defined in [`js/data.js`](js/data.js).
+You can add a new project in **two ways**:
+1. **One-Command Auto-Importer** (`add-project.ps1` or `add-project.bat`): Give it a document & link, and it sets up everything automatically.
+2. **Manual Markdown File** (`content/projects/your-project.md`): Drop a markdown file in the folder and double-click `sync.bat`.
 
 ---
 
-## 1. How to Add a New Project
+## ⚡ Method 1: The One-Command Importer (Recommended)
 
-### Step 1: Save your media
-1. Create a new folder inside `assets/projects/<project-name>/` (e.g., `assets/projects/quadruped/`).
-2. Place your photos, diagrams, and video clips (`.mp4`) inside that folder.
+Whenever you have a new project with a README, notes doc, paper PDF, or GitHub link, just run:
 
-### Step 2: Add an entry in `js/data.js`
-Open [`js/data.js`](js/data.js), locate the `PROJECTS` array, and paste your new project at the **top** (so it appears first):
-
-```javascript
-{
-  slug: "my-new-robot",                           // Unique URL slug (e.g. project.html?id=my-new-robot)
-  title: "Autonomous Quadruped Locomotion",       // Card and page title
-  short: "Short 1-2 sentence pitch for the home card.",
-  year: "2026",
-  role: "Lead Autonomy Engineer",
-  org: "Lab or Company Name",
-  category: ["robotics", "perception"],           // Options: "robotics", "perception", "ai", "research"
-  tags: ["ROS 2", "Nav2", "C++", "PyTorch"],      // Display pills
-  cover: "assets/projects/my-new-robot/cover.jpg",// Thumbnail image
-  coverVideo: "assets/projects/my-new-robot/demo.mp4", // Optional: hover video clip
-  size: "lg",                                     // Bento size: "lg", "md", or "tall"
-  links: [
-    { label: "GitHub Code", url: "https://github.com/Rohitra078/repo", icon: "github" },
-    { label: "Paper (PDF)", url: "assets/docs/my-paper.pdf", icon: "doc" }
-  ],
-  body: [
-    { type: "h", text: "Overview" },
-    { type: "p", text: "Explain the project goals and methodology here. You can use <strong>bold tags</strong>." },
-
-    { type: "img", src: "assets/projects/my-new-robot/diagram.png", caption: "System architecture", light: true },
-    
-    { type: "metrics", items: [
-        { value: "40 Hz", label: "Control loop rate" },
-        { value: "99.2%", label: "Obstacle detection accuracy" }
-    ]},
-
-    { type: "h", text: "Hardware & Sensors" },
-    { type: "list", items: [
-        "Velodyne LiDAR for 3D point cloud generation",
-        "NVIDIA Jetson Orin running ROS 2 Humble",
-        "Custom motor controllers via CAN bus"
-    ]},
-
-    { type: "video", src: "assets/projects/my-new-robot/demo.mp4", caption: "Hardware field test" },
-    
-    // If you have a YouTube video:
-    // { type: "youtube", id: "YOUTUBE_VIDEO_ID", caption: "YouTube demonstration" },
-
-    { type: "callout", text: "Key Takeaway: The controller maintained dynamic stability across rough incline terrain." }
-  ]
-},
+### Using PowerShell:
+```powershell
+.\add-project.ps1 -Doc "path\to\notes.md" -Link "https://github.com/Rohitra078/my-new-repo"
 ```
 
----
-
-## 2. Available Block Types in `project.body`
-
-You can assemble project breakdowns using any combination of these blocks:
-
-| Block Type | Code Snippet | What it Does |
-|---|---|---|
-| **Heading** | `{ type: "h", text: "Section Name" }` | Creates an `<h2>` and automatically adds it to the sticky side navigation |
-| **Paragraph** | `{ type: "p", text: "Description..." }` | Body paragraph (supports `<strong>` and `<a>` links) |
-| **Bullet List** | `{ type: "list", items: ["Point 1", "Point 2"] }` | Clean bullet points with custom cyan markers |
-| **Image** | `{ type: "img", src: "path.png", caption: "Desc", light: true }` | Image with automatic click-to-zoom lightbox (`light: true` adds clean white backing for black-line schematics) |
-| **Local Video** | `{ type: "video", src: "clip.mp4", caption: "Demo" }` | Embedded HTML5 video with controls |
-| **YouTube** | `{ type: "youtube", id: "VIDEO_ID", caption: "Demo" }` | Fast-loading lite YouTube player (no tracking cookies until clicked) |
-| **Image Gallery**| `{ type: "gallery", items: [{src, caption}, ...] }` | Side-by-side comparison images (e.g. Loop closure ON vs OFF) |
-| **Metrics** | `{ type: "metrics", items: [{value: "10x", label: "Speed"}] }` | Large cybernetic stat badges |
-| **Callout** | `{ type: "callout", text: "Important takeaway..." }` | Glowing border notification box |
-
----
-
-## 3. How to Update Your Profile & Contact Details
-
-In [`js/data.js`](js/data.js), look at the `PROFILE` object:
-
-```javascript
-const PROFILE = {
-  name: "Rohit Hiraman Rajput",
-  title: "Robotics & AI Engineer",
-  email: "rajput.ro@northeastern.edu", // Update email here
-  location: "Boston, MA",
-  photo: "assets/img/profile.jpg",     // Change profile photo path here
-  roles: [                             // Typewriter words on the hero section:
-    "autonomous navigation",
-    "perception & SLAM",
-    "multi-modal robots",
-    "deep learning for robotics",
-    "computer vision"
-  ],
-  socials: {
-    github: "https://github.com/Rohitra078",
-    gitlab: "https://gitlab.com/Rohitra078",
-    linkedin: "https://www.linkedin.com/in/rohit-rajput1/"
-  }
-};
+### With optional custom cover image or title:
+```powershell
+.\add-project.ps1 `
+  -Title "Autonomous Drone Swarm Navigation" `
+  -Doc "C:\Users\rohit\Documents\drone-report.md" `
+  -Link "https://github.com/Rohitra078/drone-swarm" `
+  -Cover "C:\Users\rohit\Pictures\drone-flight.jpg" `
+  -Tags "ROS 2, PX4, Nav2, C++"
 ```
 
+### Or simply double-click `add-project.bat`:
+A prompt will ask you for:
+1. Document path (Markdown, text notes, or PDF report)
+2. Project link (GitHub repo, demo video, or paper)
+3. Title (or press Enter to auto-detect from doc)
+4. Cover image (optional)
+
+**What it does automatically:**
+- Copies the document and cover image into `assets/projects/<slug>/`
+- Creates the markdown project file in `content/projects/<slug>.md`
+- Automatically compiles the site database (`js/data.js`)
+- Previews the local URL so you can inspect it immediately!
+
 ---
 
-## 4. How to Update Experience / Career Timeline
+## 📝 Method 2: Create a Markdown File Directly
 
-In [`js/data.js`](js/data.js), look at `EXPERIENCE`:
-Add or edit any position by modifying the role, organization, dates, and bullet points.
+If you prefer writing Markdown by hand:
+
+1. Create a file inside `content/projects/<slug>.md` (e.g. `content/projects/quadruped-rl.md`).
+2. Add this frontmatter at the top:
+
+```markdown
+---
+title: "Quadruped Locomotion via Reinforcement Learning"
+slug: "quadruped-rl"
+year: "2026"
+role: "Lead Autonomy Engineer"
+org: "SiliconSynapse / Northeastern"
+category: ["robotics", "ai"]
+tags: ["PyTorch", "Isaac Sim", "ROS 2", "Sim-to-Real"]
+cover: "assets/projects/quadruped/cover.jpg"
+links:
+  - label: "Code on GitHub"
+    url: "https://github.com/Rohitra078/quadruped-rl"
+    icon: "github"
+  - label: "Paper (PDF)"
+    url: "assets/docs/quadruped-paper.pdf"
+    icon: "doc"
+metrics:
+  - value: "500 Hz"
+    label: "Inference loop frequency"
+  - value: "94%"
+    label: "Sim-to-real success rate"
+---
+
+## Overview
+
+Description of the problem, robot platform, and control strategy. You can use **bold text**, [links](https://...), and lists.
+
+![System architecture](assets/projects/quadruped/arch.png){light}
+
+## Hardware Validation
+
+Details on motor torque limits, sensor feedback, and sim-to-real transfer.
+
+<video src="assets/projects/quadruped/sim-test.mp4" caption="Terrain traversal in Isaac Sim"></video>
+
+> The controller adapted to unanticipated payload changes within 120 ms.
+```
+
+3. Double-click `sync.bat` (or run `powershell scripts\sync-content.ps1`).  
+   **Done!** Your project is compiled and rendered on the home page and in its own dedicated detail page.
 
 ---
 
-## 5. How to Update Skills
+## 🎨 Available Markdown Elements
 
-In [`js/data.js`](js/data.js), look at `SKILLS`:
-Each category contains an `items` array. Simply add or remove technology keywords like `"Isaac Sim"`, `"Nav2"`, or `"TensorRT"`.
+You can freely mix these elements in your project markdown:
+
+| Feature | Syntax in Markdown |
+|---|---|
+| **Headings** | `## System Architecture` (automatically populates the side Table of Contents) |
+| **Images** | `![Caption](assets/path/diagram.png)` (click-to-zoom lightbox enabled) |
+| **White-backed Diagrams** | `![Caption](assets/path/ros-graph.png){light}` (adds clean white background for black schematics) |
+| **Embedded MP4 Video** | `<video src="assets/path/test.mp4" caption="Hardware field test"></video>` |
+| **Embedded YouTube Video**| `<youtube id="VIDEO_ID" caption="Walkthrough demo"></youtube>` (ultra-fast lite embed) |
+| **Callout / Highlights** | `> Important result or takeaway message` (styled with glowing cybernetic border) |
+| **Metric Stat Badges** | Listed in the frontmatter `metrics:` (generates large gradient numbers) |
 
 ---
 
-## 6. How to Commit & Push Changes to GitHub
+## 👤 Updating Profile, Bio & Skills
 
-Once you make edits in `js/data.js`:
+Your global profile and competencies are stored in [`js/data.js`](js/data.js):
+
+- **Profile bio & contact**: Search for `const PROFILE = { ... }` in `js/data.js`. Change your email, location, or social links.
+- **Hero typewriter keywords**: Edit the `roles:` array inside `PROFILE`.
+- **Experience timeline**: Search for `const EXPERIENCE = [ ... ]` in `js/data.js`.
+- **Skills matrix**: Search for `const SKILLS = [ ... ]` in `js/data.js`.
+
+---
+
+## 🚀 Pushing Updates to GitHub Pages
+
+Whenever you add a project or make edits, run:
 
 ```powershell
-# 1. Check what changed
-git status
-
-# 2. Stage your changes
-git add js/data.js assets/
-
-# 3. Commit with a message
-git commit -m "Add new autonomous robot project"
-
-# 4. Push to GitHub (Pages will update automatically in ~60 seconds)
-git push origin main
+git add .
+git commit -m "Add new project"
+git push
 ```
+
+Within ~60 seconds, GitHub Pages automatically deploys the latest version to your site!
